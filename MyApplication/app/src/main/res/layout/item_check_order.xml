@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="1dp"
+    app:cardBackgroundColor="@android:color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <!-- Order ID -->
+        <TextView
+            android:id="@+id/tvCheckOrderId"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:text="#001"
+            android:textStyle="bold"
+            android:textColor="#808080"
+            android:textSize="12sp" />
+
+        <!-- Customer Name -->
+        <TextView
+            android:id="@+id/tvCheckCustomerName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Customer Name"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"/>
+
+        <!-- Garment Name Badge -->
+        <TextView
+            android:id="@+id/tvCheckStatus" 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Shirt"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="4dp"
+            android:background="@drawable/bg_black_rounded"
+            android:backgroundTint="#FFF0F0"
+            android:textColor="#FF0000"
+            android:gravity="center"/>
+
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>
