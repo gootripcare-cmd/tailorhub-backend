@@ -65,10 +65,10 @@ WSGI_APPLICATION = 'tailorhub_backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'tailorhub',
-        'USER': 'tailorhub',
-        'PASSWORD': 'r7L2uIgW1I98Ry9MSZkaSGFjHA7cO4RZ',
-        'HOST': 'dpg-d6gn5evkijhs73f0vo5g-a.oregon-postgres.render.com',
+        'NAME': 'tailorhubdb',
+        'USER': 'tailorhubdb_user',
+        'PASSWORD': 'bLYlMWh5au9cM8MqKsRrsO5PEoochzPL',
+        'HOST': 'dpg-d6nt1lhaae7s738ldesg-a.oregon-postgres.render.com',
         'PORT': '5432',
     }
 }
