@@ -349,3 +349,38 @@ def get_dashboard_stats(request):
         return Response(data, status=status.HTTP_200_OK)
     except Exception as e:
         return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+@api_view(['POST'])
+def update_order_status(request):
+    """
+    POST /api/update_order_status/
+    Body: { mobile_number, garment_type, status }
+    """
+    data = request.data
+    mobile_number = data.get('mobile_number', '').strip()
+    garment_type = data.get('garment_type', '').strip()
+    new_status = data.get('status', '').strip()
+
+    if not mobile_number or not garment_type or not new_status:
+        return Response({'error': 'Missing required fields.'}, status=status.HTTP_400_BAD_REQUEST)
+
+    try:
+        customer = Customer.objects.get(mobile_number=mobile_number)
+        
+        # Update latest Measurement
+        measurement = Measurement.objects.filter(customer=customer, garment_type=garment_type).order_by('-id').first()
+        if measurement:
+            measurement.status = new_status
+            measurement.save()
+            
+        # Update latest Order
+        order = Order.objects.filter(customer=customer, garment_type=garment_type).order_by('-id').first()
+        if order:
+            order.status = new_status
+            order.save()
+            
+        return Response({'message': f'Status updated to {new_status}'}, status=status.HTTP_200_OK)
+    except Customer.DoesNotExist:
+        return Response({'error': 'Customer not found.'}, status=status.HTTP_404_NOT_FOUND)
+    except Exception as e:
+        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

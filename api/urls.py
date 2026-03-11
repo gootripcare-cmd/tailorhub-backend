@@ -19,4 +19,5 @@ urlpatterns = [
     path('api/orders/recent/', views.get_recent_orders, name='get_recent_orders'),
     path('api/orders/<int:order_id>/', views.get_order_status, name='get_order_status'),
     path('api/dashboard/stats/', views.get_dashboard_stats, name='get_dashboard_stats'),
+    path('api/update_order_status/', views.update_order_status, name='update_order_status'),
 ]
