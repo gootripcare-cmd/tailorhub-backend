@@ -79,7 +79,13 @@ def login_user(request):
     try:
         user = TailorUser.objects.get(username=username, password=password)
         return Response(
-            {'status': 'success', 'message': 'Login successful.', 'user_id': user.id},
+            {
+                'status': 'success', 
+                'message': 'Login successful.', 
+                'user_id': user.id,
+                'mobile_number': user.mobile_number,
+                'full_name': f"{user.first_name} {user.last_name}"
+            },
             status=status.HTTP_200_OK,
         )
     except TailorUser.DoesNotExist:
