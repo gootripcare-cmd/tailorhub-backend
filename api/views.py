@@ -294,10 +294,14 @@ def get_recent_orders(request):
     Returns the most recent orders with customer name, garment type, status.
     """
     limit = int(request.query_params.get('limit', 5))
-    orders = (
-        Order.objects.select_related('customer')
-        .order_by('-id')[:limit]
-    )
+    status_filter = request.query_params.get('status')
+    
+    orders = Order.objects.select_related('customer').order_by('-id')
+    
+    if status_filter:
+        orders = orders.filter(status=status_filter)
+        
+    orders = orders[:limit]
     data = [
         {
             'id': str(o.id),
