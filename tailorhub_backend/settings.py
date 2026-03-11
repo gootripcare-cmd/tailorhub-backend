@@ -11,11 +11,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-tailorhub-secret-key-change-in-production-2024'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 import os
 
-ALLOWED_HOSTS = ['*'] # In a real production app, restrict this to your domain and '.onrender.com'
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 INSTALLED_APPS = [
@@ -70,6 +70,9 @@ DATABASES = {
         'PASSWORD': 'bLYlMWh5au9cM8MqKsRrsO5PEoochzPL',
         'HOST': 'dpg-d6nt1lhaae7s738ldesg-a.oregon-postgres.render.com',
         'PORT': '5432',
+        'OPTIONS': {
+            'sslmode': 'require',
+        },
     }
 }
 # Password validation

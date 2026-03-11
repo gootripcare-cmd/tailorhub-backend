@@ -232,6 +232,43 @@ def add_measurement(request):
     return Response({'message': 'Measurement saved.'}, status=status.HTTP_201_CREATED)
 
 
+@api_view(['GET'])
+def get_measurements(request, mobile):
+    """
+    GET /api/measurements/<mobile>/?garment_type=Shirt
+    Returns the customer's most recent measurement for this garment, mapped so Android can parse it.
+    """
+    garment_type = request.query_params.get('garment_type', 'Shirt')
+    
+    try:
+        customer = Customer.objects.get(mobile_number=mobile)
+        measurement = (
+            Measurement.objects.filter(customer=customer, garment_type=garment_type)
+            .order_by('-id')
+            .first()
+        )
+        
+        if not measurement:
+            return Response({'error': 'No matching measurements found.'}, status=status.HTTP_404_NOT_FOUND)
+            
+        return Response({
+            'id': measurement.id,
+            'garment_type': measurement.garment_type,
+            'length': measurement.length,
+            'chest': measurement.chest,
+            'waist': measurement.waist,
+            'collar': measurement.collar,
+            'shoulder': measurement.shoulder,
+            'sleeve': measurement.sleeve,
+            'hip': measurement.hip,
+            'rise': measurement.rise,
+            'notes': measurement.notes,
+            'status': measurement.status
+        }, status=status.HTTP_200_OK)
+        
+    except Customer.DoesNotExist:
+        return Response({'error': 'Customer not found.'}, status=status.HTTP_404_NOT_FOUND)
+
 # ──────────────────────────── ORDERS ────────────────────────────
 
 @api_view(['GET'])
@@ -270,3 +307,26 @@ def get_recent_orders(request):
         for o in orders
     ]
     return Response(data, status=status.HTTP_200_OK)
+
+
+@api_view(['GET'])
+def get_dashboard_stats(request):
+    """
+    GET /api/dashboard/stats/
+    Returns: { total_customers, total_orders, pending_orders, completed_orders }
+    """
+    try:
+        total_customers = Customer.objects.count()
+        total_orders = Order.objects.count()
+        pending_orders = Order.objects.filter(status='Pending').count()
+        completed_orders = Order.objects.filter(status='Completed').count()
+
+        data = {
+            'total_customers': total_customers,
+            'total_orders': total_orders,
+            'pending_orders': pending_orders,
+            'completed_orders': completed_orders,
+        }
+        return Response(data, status=status.HTTP_200_OK)
+    except Exception as e:
+        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

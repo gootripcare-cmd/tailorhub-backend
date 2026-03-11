@@ -13,8 +13,10 @@ urlpatterns = [
 
     # Measurements
     path('api/add_measurement/', views.add_measurement, name='add_measurement'),
+    path('api/measurements/<str:mobile>/', views.get_measurements, name='get_measurements'),
 
     # Orders
     path('api/orders/recent/', views.get_recent_orders, name='get_recent_orders'),
     path('api/orders/<int:order_id>/', views.get_order_status, name='get_order_status'),
+    path('api/dashboard/stats/', views.get_dashboard_stats, name='get_dashboard_stats'),
 ]
