@@ -172,17 +172,17 @@ def add_measurement(request):
 
     measurement_fields = {
         'customer': customer,
-        'garment_type': garment_type,
-        'length': data.get('length', '').strip(),
-        'chest': data.get('chest', '').strip(),
-        'waist': data.get('waist', '').strip(),
-        'collar': data.get('collar', '').strip(),
-        'shoulder': data.get('shoulder', '').strip(),
-        'sleeve': data.get('sleeve', '').strip(),
-        'hip': data.get('hip', '').strip(),
-        'rise': data.get('rise', '').strip(),
-        'notes': data.get('notes', '').strip(),
-        'status': data.get('status', 'Pending').strip(),
+        'garment_type': str(data.get('garment_type', 'Shirt')).strip(),
+        'length': str(data.get('length', '')).strip(),
+        'chest': str(data.get('chest', '')).strip(),
+        'waist': str(data.get('waist', '')).strip(),
+        'collar': str(data.get('collar', '')).strip(),
+        'shoulder': str(data.get('shoulder', '')).strip(),
+        'sleeve': str(data.get('sleeve', '')).strip(),
+        'hip': str(data.get('hip', '')).strip(),
+        'rise': str(data.get('rise', '')).strip(),
+        'notes': str(data.get('notes', '')).strip(),
+        'status': str(data.get('status', 'Pending')).strip(),
     }
 
     if is_update:
