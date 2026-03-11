@@ -299,7 +299,10 @@ def get_recent_orders(request):
     orders = Order.objects.select_related('customer').order_by('-id')
     
     if status_filter:
-        orders = orders.filter(status=status_filter)
+        if status_filter.lower() == 'active':
+            orders = orders.exclude(status__in=['Completed', 'Delivered', 'completed', 'delivered'])
+        else:
+            orders = orders.filter(status=status_filter)
         
     orders = orders[:limit]
     data = [
