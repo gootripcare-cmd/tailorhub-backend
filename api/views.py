@@ -322,10 +322,14 @@ def get_dashboard_stats(request):
         total_orders = Order.objects.count()
         pending_orders = Order.objects.filter(status='Pending').count()
         completed_orders = Order.objects.filter(status='Completed').count()
+        
+        # Active orders = Anything not Completed or Delivered
+        active_orders = Order.objects.exclude(status__in=['Completed', 'Delivered']).count()
 
         data = {
             'total_customers': total_customers,
             'total_orders': total_orders,
+            'active_orders': active_orders,
             'pending_orders': pending_orders,
             'completed_orders': completed_orders,
         }
