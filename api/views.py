@@ -179,6 +179,8 @@ def add_measurement(request):
         'collar': data.get('collar', '').strip(),
         'shoulder': data.get('shoulder', '').strip(),
         'sleeve': data.get('sleeve', '').strip(),
+        'hip': data.get('hip', '').strip(),
+        'rise': data.get('rise', '').strip(),
         'notes': data.get('notes', '').strip(),
         'status': data.get('status', 'Pending').strip(),
     }

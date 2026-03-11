@@ -63,6 +63,8 @@ class Measurement(models.Model):
     collar = models.CharField(max_length=20, blank=True, default='')
     shoulder = models.CharField(max_length=20, blank=True, default='')
     sleeve = models.CharField(max_length=20, blank=True, default='')
+    hip = models.CharField(max_length=20, blank=True, default='')
+    rise = models.CharField(max_length=20, blank=True, default='')
     notes = models.TextField(blank=True, default='')
     status = models.CharField(max_length=50, choices=STATUS_CHOICES, default='Pending')
 
