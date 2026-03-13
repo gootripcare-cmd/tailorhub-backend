@@ -22,8 +22,8 @@ def health(request):
 def app_version(request):
     data = {
         "latest_version": "1.1",
-        "update_required": True,
-        "update_url": "https://play.google.com/store/apps/details?id=com.tailorhub"
+        "force_update": True,
+        "apk_url": "https://github.com/gootripcare-cmd/tailorhub-backend/releases/download/tailor/app-debug.apk"
     }
     return JsonResponse(data)
 
