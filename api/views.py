@@ -19,6 +19,14 @@ from .serializers import (
 def health(request):
     return JsonResponse({"status": "ok"})
 
+def app_version(request):
+    data = {
+        "latest_version": "1.1",
+        "update_required": True,
+        "update_url": "https://play.google.com/store/apps/details?id=com.tailorhub"
+    }
+    return JsonResponse(data)
+
 
 # ──────────────────────────── AUTH ────────────────────────────
 
