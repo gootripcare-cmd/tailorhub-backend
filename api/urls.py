@@ -2,6 +2,8 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
+    path('', views.health, name='home'),
+    path('health/', views.health, name='health'),
     # Auth
     path('api/register/', views.register_user, name='register'),
     path('api/login/', views.login_user, name='login'),
@@ -9,6 +11,7 @@ urlpatterns = [
     # Customers
     path('api/add_customer/', views.add_customer, name='add_customer'),
     path('api/get_customers/', views.get_customers, name='get_customers'),
+    path('api/customer/<str:mobile>/', views.get_customer_details, name='get_customer_details'),
     path('api/delete_customer/<str:mobile>/', views.delete_customer, name='delete_customer'),
 
     # Measurements
@@ -20,4 +23,5 @@ urlpatterns = [
     path('api/orders/<int:order_id>/', views.get_order_status, name='get_order_status'),
     path('api/dashboard/stats/', views.get_dashboard_stats, name='get_dashboard_stats'),
     path('api/update_order_status/', views.update_order_status, name='update_order_status'),
+    path('api/check_update/', views.check_update, name='check_update'),
 ]

@@ -100,3 +100,13 @@ class Order(models.Model):
 
     def __str__(self):
         return f"Order #{self.id} – {self.customer.name} ({self.garment_type})"
+
+class AppConfig(models.Model):
+    latest_version_code = models.IntegerField(default=1)
+    latest_version_name = models.CharField(max_length=20, default="1.0.0")
+    download_url = models.URLField(max_length=500, blank=True, null=True)
+    force_update = models.BooleanField(default=False)
+    update_message = models.TextField(blank=True, default="A new update is available!")
+
+    def __str__(self):
+        return f"v{self.latest_version_name} ({self.latest_version_code})"

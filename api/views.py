@@ -1,5 +1,6 @@
 import json
 from datetime import date
+from django.http import JsonResponse
 
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
@@ -13,6 +14,10 @@ from .serializers import (
     CustomerSerializer,
     OrderStatusSerializer,
 )
+
+
+def health(request):
+    return JsonResponse({"status": "ok"})
 
 
 # ──────────────────────────── AUTH ────────────────────────────
@@ -136,6 +141,20 @@ def get_customers(request):
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 
+@api_view(['GET'])
+def get_customer_details(request, mobile):
+    """
+    GET /api/customer/<mobile>/
+    Returns details of a single customer.
+    """
+    try:
+        customer = Customer.objects.get(mobile_number=mobile)
+        serializer = CustomerSerializer(customer)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    except Customer.DoesNotExist:
+        return Response({'error': 'Customer not found.'}, status=status.HTTP_404_NOT_FOUND)
+
+
 @api_view(['DELETE'])
 def delete_customer(request, mobile):
     """
@@ -250,11 +269,9 @@ def get_measurements(request, mobile):
     
     try:
         customer = Customer.objects.get(mobile_number=mobile)
-        measurement = (
-            Measurement.objects.filter(customer=customer, garment_type=garment_type)
-            .order_by('-id')
-            .first()
-        )
+        measurements = Measurement.objects.filter(customer=customer, garment_type=garment_type)
+        garment_count = measurements.count()
+        measurement = measurements.order_by('-id').first()
         
         if not measurement:
             return Response({'error': 'No matching measurements found.'}, status=status.HTTP_404_NOT_FOUND)
@@ -271,7 +288,8 @@ def get_measurements(request, mobile):
             'hip': measurement.hip,
             'rise': measurement.rise,
             'notes': measurement.notes,
-            'status': measurement.status
+            'status': measurement.status,
+            'count': garment_count
         }, status=status.HTTP_200_OK)
         
     except Customer.DoesNotExist:
@@ -305,16 +323,20 @@ def get_recent_orders(request):
     orders = Order.objects.select_related('customer').order_by('-id')
     
     if status_filter:
-        if status_filter.lower() == 'active':
-            orders = orders.exclude(status__in=['Completed', 'Delivered', 'completed', 'delivered'])
+        s_lower = status_filter.lower()
+        if s_lower == 'active':
+            orders = orders.exclude(status__in=['Completed', 'Delivered', 'completed', 'delivered', 'READY', 'Ready', 'ready'])
+        elif s_lower == 'completed':
+            orders = orders.filter(status__in=['Completed', 'Ready', 'completed', 'ready', 'COMPLETED', 'READY'])
         else:
-            orders = orders.filter(status=status_filter)
+            orders = orders.filter(status__iexact=status_filter)
         
     orders = orders[:limit]
     data = [
         {
             'id': str(o.id),
             'customer_name': o.customer.name,
+            'mobile_number': o.customer.mobile_number,
             'garment_type': o.garment_type,
             'status': o.status,
             'order_date': o.order_date,
@@ -333,11 +355,11 @@ def get_dashboard_stats(request):
     try:
         total_customers = Customer.objects.count()
         total_orders = Order.objects.count()
-        pending_orders = Order.objects.filter(status='Pending').count()
-        completed_orders = Order.objects.filter(status='Completed').count()
+        pending_orders = Order.objects.filter(status__iexact='Pending').count()
+        completed_orders = Order.objects.filter(status__in=['Completed', 'Ready', 'completed', 'ready', 'COMPLETED', 'READY']).count()
         
-        # Active orders = Anything not Completed or Delivered
-        active_orders = Order.objects.exclude(status__in=['Completed', 'Delivered']).count()
+        # In Progress orders specifically
+        active_orders = Order.objects.filter(status__iexact='In Progress').count()
 
         data = {
             'total_customers': total_customers,
@@ -384,3 +406,27 @@ def update_order_status(request):
         return Response({'error': 'Customer not found.'}, status=status.HTTP_404_NOT_FOUND)
     except Exception as e:
         return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+@api_view(['GET'])
+def check_update(request):
+    """
+    GET /api/check_update/
+    """
+    from .models import AppConfig
+    config = AppConfig.objects.first()
+    if not config:
+        # Create a default one if none exists
+        config = AppConfig.objects.create(
+            latest_version_code=1,
+            latest_version_name="1.0.0",
+            download_url="",
+            force_update=False
+        )
+    
+    return Response({
+        'latest_version_code': config.latest_version_code,
+        'latest_version_name': config.latest_version_name,
+        'download_url': config.download_url,
+        'force_update': config.force_update,
+        'update_message': config.update_message
+    }, status=status.HTTP_200_OK)
