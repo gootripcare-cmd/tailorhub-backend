@@ -1,0 +1,25 @@
+0000000000000000000000000000000000000000 8769c3cc0b358b5b303e26b57b1e1cfc7b82e479 dharmik264 <dp9825723837@gmail.com> 1773053619 +0530	commit (initial): first commit
+8769c3cc0b358b5b303e26b57b1e1cfc7b82e479 0000000000000000000000000000000000000000 dharmik264 <dp9825723837@gmail.com> 1773053619 +0530	Branch: renamed refs/heads/master to refs/heads/main
+0000000000000000000000000000000000000000 8769c3cc0b358b5b303e26b57b1e1cfc7b82e479 dharmik264 <dp9825723837@gmail.com> 1773053619 +0530	Branch: renamed refs/heads/master to refs/heads/main
+8769c3cc0b358b5b303e26b57b1e1cfc7b82e479 0000000000000000000000000000000000000000 dharmik264 <dp9825723837@gmail.com> 1773054141 +0530	Branch: renamed refs/heads/main to refs/heads/main
+8769c3cc0b358b5b303e26b57b1e1cfc7b82e479 8769c3cc0b358b5b303e26b57b1e1cfc7b82e479 dharmik264 <dp9825723837@gmail.com> 1773054141 +0530	Branch: renamed refs/heads/main to refs/heads/main
+8769c3cc0b358b5b303e26b57b1e1cfc7b82e479 95b25efc90f87538f0fee2df66d99db783a5234b dharmik264 <dp9825723837@gmail.com> 1773054294 +0530	commit: Initial commit
+95b25efc90f87538f0fee2df66d99db783a5234b c577555432d28071ef61589bfa839fec33f41648 dharmik264 <dp9825723837@gmail.com> 1773054891 +0530	commit: remove folder
+c577555432d28071ef61589bfa839fec33f41648 614bd0db1b4e850c0509b7dbf65a73aa8044dc6b dharmik264 <dp9825723837@gmail.com> 1773218383 +0530	commit: feat: Add Render Dashboard and Specific Profile Endpoints
+614bd0db1b4e850c0509b7dbf65a73aa8044dc6b 2e4380b0a4ee4876382d237222fadb04cc4eeb73 dharmik264 <dp9825723837@gmail.com> 1773218406 +0530	pull origin main --rebase (start): checkout 2e4380b0a4ee4876382d237222fadb04cc4eeb73
+2e4380b0a4ee4876382d237222fadb04cc4eeb73 2d1125c07938c762112da1a8a0afe75518783b3f dharmik264 <dp9825723837@gmail.com> 1773218406 +0530	pull origin main --rebase (pick): feat: Add Render Dashboard and Specific Profile Endpoints
+2d1125c07938c762112da1a8a0afe75518783b3f 2d1125c07938c762112da1a8a0afe75518783b3f dharmik264 <dp9825723837@gmail.com> 1773218406 +0530	pull origin main --rebase (finish): returning to refs/heads/main
+2d1125c07938c762112da1a8a0afe75518783b3f 8a30557b4b4297446b4e031f836d50963db760cb dharmik264 <dp9825723837@gmail.com> 1773223811 +0530	commit: feat: Add hip and rise fields to Measurement model and view
+8a30557b4b4297446b4e031f836d50963db760cb fc4e83c07147f8c95e28dc762edfac5a6b2e74a4 dharmik264 <dp9825723837@gmail.com> 1773224533 +0530	commit: fix: make add_measurement more robust and improve Android data refresh
+fc4e83c07147f8c95e28dc762edfac5a6b2e74a4 3f0fed7c65b8ededc2fe4c0c31ca2f290b075207 dharmik264 <dp9825723837@gmail.com> 1773225769 +0530	commit: fix: correctly calculate and display active orders count
+3f0fed7c65b8ededc2fe4c0c31ca2f290b075207 c708efbfd414f16651b3b501630a66ce3b84def7 dharmik264 <dp9825723837@gmail.com> 1773226169 +0530	commit: feat: enable status-based order filtering via API and Dashboard click
+c708efbfd414f16651b3b501630a66ce3b84def7 166ae2f9a69c0d292ff718a4e1073bc130db755b dharmik264 <dp9825723837@gmail.com> 1773228927 +0530	commit: fix: correctly handle active orders and list layout in CheckOrderActivity
+166ae2f9a69c0d292ff718a4e1073bc130db755b a71e5ac9425ad1bf139a42ade5424d6938c41309 dharmik264 <dp9825723837@gmail.com> 1773230438 +0530	commit: fix: include mobile and name in login response
+a71e5ac9425ad1bf139a42ade5424d6938c41309 daa09fe6525ed2123f364ab2e60bedb3c8347df9 dharmik264 <dp9825723837@gmail.com> 1773231783 +0530	commit: feat: add order status update functionality to customer profile
+daa09fe6525ed2123f364ab2e60bedb3c8347df9 ab587123972dd0631a496c9d00068222b2708c33 dharmik264 <dp9825723837@gmail.com> 1773380498 +0530	commit: Add health check endpoint
+ab587123972dd0631a496c9d00068222b2708c33 757d28984fdaf98f7dd2e19754a2b7f3b55d01f9 dharmik264 <dp9825723837@gmail.com> 1773382013 +0530	commit: Add app version check endpoint
+757d28984fdaf98f7dd2e19754a2b7f3b55d01f9 41b36a5eea0c49e96de24eb8e9ef917ae3d74b0a dharmik264 <dp9825723837@gmail.com> 1773384673 +0530	commit: Update health check and app version logic
+41b36a5eea0c49e96de24eb8e9ef917ae3d74b0a ca876333b4b39e6a067880b6d5796ec17ad89fb7 dharmik264 <dp9825723837@gmail.com> 1773648156 +0530	commit: Update backend files
+ca876333b4b39e6a067880b6d5796ec17ad89fb7 b7ccb4269635412a670d5f70447cd12a1bcda09f dharmik264 <dp9825723837@gmail.com> 1773649579 +0530	commit: Update CustomerSerializer to include latest order status
+b7ccb4269635412a670d5f70447cd12a1bcda09f d5befce1d03640119f964814b38cf74511113722 dharmik264 <dp9825723837@gmail.com> 1773743085 +0530	commit: Update MeasurementSerializer to include hip and rise fields
+d5befce1d03640119f964814b38cf74511113722 e514dcf6d428a15eeccbfdef0497c70f65dac918 dharmik264 <dp9825723837@gmail.com> 1773743187 +0530	commit: Clean up repository: add .gitignore and remove ignored files from index
